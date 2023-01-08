@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 09:38:49 by rjeong            #+#    #+#             */
-/*   Updated: 2022/12/14 09:38:51 by rjeong           ###   ########.fr       */
+/*   Created: 2022/12/14 09:38:35 by rjeong            #+#    #+#             */
+/*   Updated: 2022/12/14 09:38:36 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
+#include "../minitalk.h"
+
+int	main(void)
 {
-//	convert av to signal
-//	send to server
+//	print pid
+//	wait signal
 }
