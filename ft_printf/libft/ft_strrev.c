@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 13:29:50 by rjeong            #+#    #+#             */
-/*   Updated: 2023/01/27 21:47:44 by rjeong           ###   ########.fr       */
+/*   Created: 2022/08/06 17:15:00 by rjeong            #+#    #+#             */
+/*   Updated: 2023/01/27 22:28:41 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+char	*ft_strrev(char *str, long long len)
+{
+	long long	i;
+	char		temp;
 
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-
-#endif
+	i = 0;
+	while (i < len - 1 - i)
+	{
+		temp = *(str + i);
+		*(str + i) = *(str + len - 1 - i);
+		*(str + len - 1 - i) = temp;
+		++i;
+	}
+	return (str);
+}

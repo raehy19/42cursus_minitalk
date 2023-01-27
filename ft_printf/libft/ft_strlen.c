@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 13:29:50 by rjeong            #+#    #+#             */
-/*   Updated: 2023/01/27 21:47:44 by rjeong           ###   ########.fr       */
+/*   Created: 2022/07/04 16:42:32 by rjeong            #+#    #+#             */
+/*   Updated: 2023/01/27 22:28:44 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+int	ft_strlen(const char *s)
+{
+	int	i;
 
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-
-#endif
+	i = 0;
+	if (!s)
+		return (0);
+	while (*(s + i) != 0)
+		++i;
+	return (i);
+}
