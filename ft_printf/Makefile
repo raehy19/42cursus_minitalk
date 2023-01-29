@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME := ft_printf.a
+NAME := lib_ft_printf.a
 LIBFT := ./libft/libft.a
 LIBFT_DIR := libft
 CC := cc

@@ -6,12 +6,14 @@
 #    By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/14 09:37:01 by rjeong            #+#    #+#              #
-#    Updated: 2022/12/14 09:37:04 by rjeong           ###   ########.fr        #
+#    Updated: 2023/01/27 21:47:39 by rjeong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := server client
 NAME_BONUS := server_bonus client_bonus
+FT_PRINTF := ./ft_printf/lib_ft_printf.a
+FT_PRINTF_DIR := ft_printf
 NAME_S := server
 NAME_C := client
 NAME_S_BONUS := server_bonus
@@ -58,6 +60,7 @@ CLIENT_DEPS_BONUS := $(addprefix client_srcs/, $(CLIENT_SRCS_BONUS:.c=.d))
 -include $(SERVER_DEPS) $(SERVER_DEPS_BONUS) $(CLIENT_DEPS) $(CLIENT_DEPS_BONUS)
 
 clean :
+	make -C $(FT_PRINTF_DIR) clean
 	$(RM) $(SERVER_OBJS)
 	$(RM) $(SERVER_OBJS_BONUS)
 	$(RM) $(SERVER_DEPS)
@@ -68,14 +71,18 @@ clean :
 	$(RM) $(CLIENT_DEPS_BONUS)
 
 fclean : clean
+	make -C $(FT_PRINTF_DIR) fclean
 	$(RM) $(BONUS_NAME)
 	$(RM) $(NAME)
 
 re : fclean
 	make all
 
-$(NAME_S) : $(SERVER_OBJS)
-	$(CC) $^ -o $@
+$(FT_PRINTF) :
+	make -C $(FT_PRINTF_DIR) all
+
+$(NAME_S) : $(FT_PRINTF) $(SERVER_OBJS)
+	$(CC) -L$(FT_PRINTF_DIR) $^ -o $@ -v
 
 $(NAME_S_BONUS) : $(SERVER_OBJS_BONUS)
 	$(CC) $^ -o $@
