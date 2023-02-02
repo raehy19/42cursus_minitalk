@@ -6,18 +6,18 @@
 #    By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 14:55:50 by rjeong            #+#    #+#              #
-#    Updated: 2023/01/27 21:47:20 by rjeong           ###   ########.fr        #
+#    Updated: 2023/02/02 15:22:26 by rjeong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := lib_ft_printf.a
-LIBFT := ./libft/libft.a
+LIBFT := libft/libft.a
 LIBFT_DIR := libft
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
 RM := rm -f
 AR := ar
-ARFLAG := crs
+ARFLAG := -crs
 
 PRINTF_SRCS := \
 	ft_printf.c \
@@ -47,7 +47,7 @@ $(LIBFT) :
 
 $(NAME) : $(LIBFT) $(PRINTF_OBJS)
 	cp $(LIBFT) ./$(NAME)
-	$(AR) $(ARFLAG) $@ $^
+	$(AR) $(ARFLAG) $@ $(PRINTF_OBJS)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
