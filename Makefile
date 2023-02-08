@@ -6,7 +6,7 @@
 #    By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/14 09:37:01 by rjeong            #+#    #+#              #
-#    Updated: 2023/01/27 21:47:39 by rjeong           ###   ########.fr        #
+#    Updated: 2023/02/08 21:22:19 by rjeong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ $(FT_PRINTF) :
 	make -C $(FT_PRINTF_DIR) all
 
 $(NAME_S) : $(FT_PRINTF) $(SERVER_OBJS)
-	$(CC) -L$(FT_PRINTF_DIR) $^ -o $@ -v
+	$(CC) -L$(FT_PRINTF_DIR) $^ -o $@
 
 $(NAME_S_BONUS) : $(SERVER_OBJS_BONUS)
 	$(CC) $^ -o $@
