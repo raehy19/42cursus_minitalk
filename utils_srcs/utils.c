@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 09:38:49 by rjeong            #+#    #+#             */
-/*   Updated: 2023/02/08 21:22:58 by rjeong           ###   ########.fr       */
+/*   Created: 2023/02/11 17:13:30 by rjeong            #+#    #+#             */
+/*   Updated: 2023/02/11 17:13:32 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-int	main(int ac, char **av)
-{
-	if (ac != 3)
-		exit(1);
-	ft_print_start_pid(CLIENT);
-	(void)av;
-	// convert av[1] to int
-	// convert av to signal
-	// send to server
+void	ft_print_start_pid(t_program_type program_type) {
+	char	*a;
+
+	if (program_type == SERVER)
+		a = "Server";
+	else if (program_type == CLIENT)
+		a = "Client";
+	else
+		exit(2);
+	ft_printf("\033[36;40m%s start . . .\033[0;31m\n%s PID : ",a,a);
+	ft_printf("\033[32m%d\033[0m\n", getpid());
 }

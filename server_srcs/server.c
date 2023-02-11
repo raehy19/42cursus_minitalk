@@ -11,19 +11,18 @@
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-#include "../ft_printf/ft_printf.h"
 
 void	ft_init_sigaction(void)
 {
 	struct sigaction	sigaction;
 
-	(void)sigaction;
+	(void)sigaction.sa_flags;
+	(void)sigaction.sa_mask;
 }
 
 int	main(void)
 {
-	ft_printf("\033[36;40mServer start . . .\033[0;31m\nSEVER PID : ");
-	ft_printf("\033[32m%d\033[0m\n", getpid());
+	ft_print_start_pid(SERVER);
 	while (1)
 	{
 		pause();

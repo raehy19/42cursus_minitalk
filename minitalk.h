@@ -16,5 +16,14 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
+# include "ft_printf/ft_printf.h"
+
+typedef enum e_program_type {
+	SERVER,
+	CLIENT
+}	t_program_type;
+
+void	ft_print_start_pid(t_program_type program_type);
+
 
 #endif
