@@ -12,7 +12,8 @@
 
 #include "../minitalk.h"
 
-void	ft_print_start_pid(t_program_type program_type) {
+void	ft_print_start_pid(t_program_type program_type)
+{
 	char	*a;
 
 	if (program_type == SERVER)
@@ -20,7 +21,18 @@ void	ft_print_start_pid(t_program_type program_type) {
 	else if (program_type == CLIENT)
 		a = "Client";
 	else
-		exit(2);
-	ft_printf("\033[36;40m%s start . . .\033[0;31m\n%s PID : ",a,a);
+		exit(5);
+	ft_printf("\n\033[36;40m%s start . . .\033[0;31m\n%s PID : ",a,a);
 	ft_printf("\033[32m%d\033[0m\n", getpid());
+}
+
+void	ft_print_send_pid(int pid)
+{
+	ft_printf("\n\033[33;40mSending message to Server . . .\033[0m\n");
+	ft_printf("\033[34mServer PID : \033[35m%d\033[0m\n", pid);
+}
+
+void	ft_print_send_message(char *msg)
+{
+	ft_printf("\033[34mMessage : \033[35m%s\033[0m\n", msg);
 }

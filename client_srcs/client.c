@@ -14,11 +14,14 @@
 
 int	main(int ac, char **av)
 {
+	int	pid;
+
 	if (ac != 3)
 		exit(1);
 	ft_print_start_pid(CLIENT);
-	(void)av;
-	// convert av[1] to int
+	pid = ft_atoi((const char *)*(av + 1));
+	ft_print_send_pid(pid);
+	ft_print_send_message(*(av + 2));
 	// convert av to signal
 	// send to server
 }

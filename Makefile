@@ -12,6 +12,8 @@
 
 NAME := server client
 NAME_BONUS := server_bonus client_bonus
+LIBFT := ./libft/libft.a
+LIBFT_DIR := libft
 FT_PRINTF := ./ft_printf/lib_ft_printf.a
 FT_PRINTF_DIR := ft_printf
 NAME_S := server
@@ -96,17 +98,20 @@ fclean : clean
 re : fclean
 	make all
 
+$(LIBFT) :
+	make -C $(LIBFT_DIR) all
+
 $(FT_PRINTF) :
 	make -C $(FT_PRINTF_DIR) all
 
-$(NAME_S) : $(UTILS_OBJS) $(FT_PRINTF) $(SERVER_OBJS)
+$(NAME_S) : $(LIBFT) $(UTILS_OBJS) $(FT_PRINTF) $(SERVER_OBJS)
 	$(CC) -L$(FT_PRINTF_DIR) $^ -o $@
 
 $(NAME_S_BONUS) : $(SERVER_OBJS_BONUS)
 	$(CC) $^ -o $@
 	cp $(NAME_S_BONUS) ./$(NAME_S)
 
-$(NAME_C) : $(UTILS_OBJS) $(FT_PRINTF) $(CLIENT_OBJS)
+$(NAME_C) : $(LIBFT) $(UTILS_OBJS) $(FT_PRINTF) $(CLIENT_OBJS)
 	$(CC) $^ -o $@
 
 $(NAME_C_BONUS) : $(CLIENT_OBJS_BONUS)

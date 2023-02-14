@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 13:29:50 by rjeong            #+#    #+#             */
-/*   Updated: 2023/01/27 21:47:44 by rjeong           ###   ########.fr       */
+/*   Created: 2022/07/06 16:32:19 by rjeong            #+#    #+#             */
+/*   Updated: 2022/07/13 12:41:00 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include <unistd.h>
-# include <signal.h>
+# include <stddef.h>
 # include <stdlib.h>
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
+# include <unistd.h>
+# include <limits.h>
 
-typedef enum e_program_type {
-	SERVER,
-	CLIENT
-}	t_program_type;
+int		ft_isdigit(int c);
+int		ft_atoi(const char *str);
+char	**ft_split(char const *s, char *sep);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
-void	ft_print_start_pid(t_program_type program_type);
-void	ft_print_send_pid(int pid);
-void	ft_print_send_message(char *msg);
-
+char	*get_next_line(int fd);
 
 #endif

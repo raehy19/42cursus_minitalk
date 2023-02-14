@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 13:29:50 by rjeong            #+#    #+#             */
-/*   Updated: 2023/01/27 21:47:44 by rjeong           ###   ########.fr       */
+/*   Created: 2022/07/07 19:50:42 by rjeong            #+#    #+#             */
+/*   Updated: 2022/07/07 21:56:35 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	int	i;
 
-typedef enum e_program_type {
-	SERVER,
-	CLIENT
-}	t_program_type;
-
-void	ft_print_start_pid(t_program_type program_type);
-void	ft_print_send_pid(int pid);
-void	ft_print_send_message(char *msg);
-
-
-#endif
+	if (dst > src)
+	{
+		i = len - 1;
+		while (i > -1)
+		{
+			*(((unsigned char *) dst) + i) = *(((unsigned char *) src) + i);
+			--i;
+		}
+	}
+	else
+		ft_memcpy(dst, src, len);
+	return (dst);
+}
