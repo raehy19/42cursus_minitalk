@@ -25,8 +25,7 @@ typedef enum e_program_type {
 }	t_program_type;
 
 void	ft_print_start_pid(t_program_type program_type);
-void	ft_print_send_pid(int pid);
-void	ft_print_send_message(char *msg);
+void	ft_send_pid_msg(int pid, char *msg);
 
 
 #endif

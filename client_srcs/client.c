@@ -20,8 +20,7 @@ int	main(int ac, char **av)
 		exit(1);
 	ft_print_start_pid(CLIENT);
 	pid = ft_atoi((const char *)*(av + 1));
-	ft_print_send_pid(pid);
-	ft_print_send_message(*(av + 2));
+	ft_send_pid_msg(pid, *(av + 2));
 	// convert av to signal
 	// send to server
 }
