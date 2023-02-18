@@ -12,6 +12,19 @@
 
 #include "../minitalk.h"
 
+void	ft_set_sigaction(void *handler)
+{
+	struct sigaction	act;
+
+	sigemptyset(&act.sa_mask);
+	sigaddset(&act.sa_mask, SIGUSR1);
+	sigaddset(&act.sa_mask, SIGUSR2);
+	act.sa_flags = SA_SIGINFO | SA_RESTART;
+	act.sa_sigaction = handler;
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
+}
+
 void	ft_print_start_pid(t_program_type program_type)
 {
 	char	*a;

@@ -12,17 +12,16 @@
 
 #include "../minitalk.h"
 
-void	ft_init_sigaction(void)
+static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
-	struct sigaction	sigaction;
-
-	(void)sigaction.sa_flags;
-	(void)sigaction.sa_mask;
+	(void)uap;
+	ft_printf("sig : %d\nsi_pid : %d\n", sig, siginfo->si_pid);
 }
 
 int	main(void)
 {
 	ft_print_start_pid(SERVER);
+	ft_set_sigaction(server_handler);
 	while (1)
 	{
 		pause();
