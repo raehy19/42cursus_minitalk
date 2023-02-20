@@ -44,7 +44,7 @@ UTILS_SRCS_BONUS := \
 
 all : $(NAME)
 
-bonus : $(NAME_BONUS)
+#bonus : $(NAME_BONUS)
 
 both :
 	make all

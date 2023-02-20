@@ -45,3 +45,10 @@ void	ft_print_pid_msg(int pid, char *msg)
 	ft_printf("\033[34mServer PID : \033[35m%d\033[0m\n", pid);
 	ft_printf("\033[34mMessage    : \033[35m%s\033[0m\n", msg);
 }
+
+void	ft_print_receiving(int pid)
+{
+	ft_printf("\n\033[33;40mReceiving message from Client . . .\033[0m\n");
+	ft_printf("\033[34mClient PID : \033[35m%d\033[0m\n", pid);
+	ft_printf("\033[34mMessage    : \033[35m");
+}

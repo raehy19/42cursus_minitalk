@@ -27,5 +27,7 @@ typedef enum e_program_type {
 void	ft_set_sigaction(void *handler);
 void	ft_print_start_pid(t_program_type program_type);
 void	ft_print_pid_msg(int pid, char *msg);
+void	ft_print_receiving(int pid);
+
 
 #endif
