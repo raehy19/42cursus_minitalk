@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../minitalk.h"
+#include "signal.h"
 
 typedef struct s_client
 {
@@ -20,7 +21,7 @@ typedef struct s_client
 	unsigned int	bit_idx;
 }	t_client;
 
-t_client	g_info;
+volatile t_client	g_info;
 
 void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
@@ -29,6 +30,7 @@ void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 	{
 		if (g_info.bit_idx == 8)
 		{
+//			ft_printf("%c\n", *(g_info.msg + g_info.msg_idx));
 			g_info.bit_idx = 0;
 			if ((*(g_info.msg + g_info.msg_idx)) == 0)
 			{
@@ -46,7 +48,9 @@ void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 	else if (sig == SIGUSR2)
 		exit(2);
 	else
+	{
 		ft_printf("\nerror!\nsig : %d\nsi_pid : %d\nsi_code : %d\n", sig, siginfo->si_pid, siginfo->si_code);
+	}
 }
 
 int	main(int ac, char **av)
@@ -60,4 +64,5 @@ int	main(int ac, char **av)
 	kill(g_info.server_pid, SIGUSR1);
 	while (1)
 		pause();
+//		;
 }

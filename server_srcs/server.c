@@ -51,6 +51,11 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 		++(info.bit_idx);
 		kill(siginfo->si_pid, SIGUSR1);
 	}
+	else
+	{
+		ft_printf("\nerror!\ninfo_client_pid : %d\nsig : %d\nsi_pid : %d\nsi_code : %d\n",info.client_pid, sig, siginfo->si_pid, siginfo->si_code);
+		ft_printf("%d", kill(info.client_pid, SIGUSR2));
+	}
 }
 
 int	main(void)
@@ -59,4 +64,5 @@ int	main(void)
 	ft_set_sigaction(server_handler);
 	while (1)
 		pause();
+//		;
 }
