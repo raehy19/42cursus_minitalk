@@ -27,15 +27,15 @@ void	ft_set_sigaction(void *handler)
 
 void	ft_print_start_pid(t_program_type program_type)
 {
-	char	*a;
+	char	*type;
 
 	if (program_type == SERVER)
-		a = "Server";
+		type = "Server";
 	else if (program_type == CLIENT)
-		a = "Client";
+		type = "Client";
 	else
 		exit(5);
-	ft_printf("\n\033[36;40m%s start . . .\033[0;31m\n%s PID : ",a,a);
+	ft_printf("\n\033[36;40m%s start . . .\033[0;31m\n%s PID : ", type, type);
 	ft_printf("\033[32m%d\033[0m\n", getpid());
 }
 

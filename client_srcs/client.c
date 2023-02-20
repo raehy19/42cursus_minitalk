@@ -29,19 +29,19 @@ void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 	{
 		if (g_info.bit_idx == 8)
 		{
+			g_info.bit_idx = 0;
 			if ((*(g_info.msg + g_info.msg_idx)) == 0)
 			{
 				kill(g_info.server_pid, SIGUSR1);
 				exit(0);
 			}
 			++g_info.msg_idx;
-			g_info.bit_idx = 0;
 		}
-		++g_info.bit_idx;
-		if ((*(g_info.msg + g_info.msg_idx)) & (1 << (g_info.bit_idx - 1)))
+		if ((*(g_info.msg + g_info.msg_idx)) & (1 << (g_info.bit_idx)))
 			kill(g_info.server_pid, SIGUSR2);
 		else
 			kill(g_info.server_pid, SIGUSR1);
+		++(g_info.bit_idx);
 	}
 	else if (sig == SIGUSR2)
 		exit(2);

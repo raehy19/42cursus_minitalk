@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-#include "stdio.h"
 
 typedef struct s_server
 {
@@ -31,25 +30,21 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 		ft_print_receiving(siginfo->si_pid);
 		kill(info.client_pid, SIGUSR1);
 	}
-	else if (siginfo->si_pid != info.client_pid)
-		return;
-	else
+	else if (siginfo->si_pid == info.client_pid)
 	{
 		if (info.bit_idx == 8)
 		{
 			info.bit_idx = 0;
 			if (info.temp)
-			{
 				write(1, &info.temp, 1);
-				info.temp = '\0';
-			}
 			else
 			{
 				info.client_pid = -1;
 				ft_printf("\n\033[36;40mReceive Success !\033[0m\n");
 				kill(siginfo->si_pid, SIGUSR1);
-				return;
+				return ;
 			}
+			info.temp = '\0';
 		}
 		if (sig == SIGUSR2)
 			info.temp |= (1 << (info.bit_idx));
