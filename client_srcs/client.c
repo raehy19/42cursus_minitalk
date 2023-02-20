@@ -6,11 +6,19 @@
 /*   By: rjeong <rjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 09:38:49 by rjeong            #+#    #+#             */
-/*   Updated: 2023/02/08 21:22:58 by rjeong           ###   ########.fr       */
+/*   Updated: 2023/02/20 02:49:51 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
+
+typedef struct s_client
+{
+	int				server_pid;
+	unsigned char	*msg;
+	unsigned int	char_idx;
+	unsigned int	bit_idx;
+}	t_client;
 
 void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
@@ -27,7 +35,7 @@ int	main(int ac, char **av)
 	ft_print_start_pid(CLIENT);
 	ft_set_sigaction(client_handler);
 	pid = ft_atoi((const char *)*(av + 1));
-	ft_send_pid_msg(pid, *(av + 2));
+	ft_print_pid_msg(pid, *(av + 2));
 	// convert av to signal
 	// send to server
 }

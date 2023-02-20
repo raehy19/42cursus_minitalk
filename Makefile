@@ -76,6 +76,7 @@ UTILS_DEPS_BONUS := $(addprefix utils_srcs/, $(UTILS_SRCS_BONUS:.c=.d))
 -include $(SERVER_DEPS) $(SERVER_DEPS_BONUS) $(CLIENT_DEPS) $(CLIENT_DEPS_BONUS)
 
 clean :
+	make -C $(LIBFT_DIR) clean
 	make -C $(FT_PRINTF_DIR) clean
 	$(RM) $(SERVER_OBJS)
 	$(RM) $(SERVER_OBJS_BONUS)
@@ -91,6 +92,7 @@ clean :
 	$(RM) $(UTILS_DEPS_BONUS)
 
 fclean : clean
+	make -C $(LIBFT_DIR) fclean
 	make -C $(FT_PRINTF_DIR) fclean
 	$(RM) $(BONUS_NAME)
 	$(RM) $(NAME)
