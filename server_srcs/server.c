@@ -23,6 +23,7 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
 	static t_server	info = {-1, 0, 0};
 
+	usleep(USLEEP_SEC);
 	(void)uap;
 	if (sig == SIGUSR1 && info.client_pid == -1)
 	{
@@ -54,7 +55,7 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 	else
 	{
 		ft_printf("\nerror!\ninfo_client_pid : %d\nsig : %d\nsi_pid : %d\nsi_code : %d\n",info.client_pid, sig, siginfo->si_pid, siginfo->si_code);
-		ft_printf("%d", kill(info.client_pid, SIGUSR2));
+		exit(3);
 	}
 }
 
@@ -63,6 +64,5 @@ int	main(void)
 	ft_print_start_pid(SERVER);
 	ft_set_sigaction(server_handler);
 	while (1)
-		pause();
-//		;
+		;
 }

@@ -19,6 +19,8 @@
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 
+#define USLEEP_SEC 25
+
 typedef enum e_program_type {
 	SERVER,
 	CLIENT

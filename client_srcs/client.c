@@ -21,16 +21,16 @@ typedef struct s_client
 	unsigned int	bit_idx;
 }	t_client;
 
-volatile t_client	g_info;
+t_client	g_info;
 
 void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
+	usleep(USLEEP_SEC);
 	(void)uap;
 	if (sig == SIGUSR1 && siginfo->si_pid == g_info.server_pid)
 	{
 		if (g_info.bit_idx == 8)
 		{
-//			ft_printf("%c\n", *(g_info.msg + g_info.msg_idx));
 			g_info.bit_idx = 0;
 			if ((*(g_info.msg + g_info.msg_idx)) == 0)
 			{
@@ -50,6 +50,7 @@ void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 	else
 	{
 		ft_printf("\nerror!\nsig : %d\nsi_pid : %d\nsi_code : %d\n", sig, siginfo->si_pid, siginfo->si_code);
+		exit(3);
 	}
 }
 
@@ -63,6 +64,5 @@ int	main(int ac, char **av)
 	ft_print_pid_msg(g_info.server_pid, g_info.msg);
 	kill(g_info.server_pid, SIGUSR1);
 	while (1)
-		pause();
-//		;
+		;
 }
