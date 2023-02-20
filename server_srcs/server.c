@@ -24,7 +24,6 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
 	static t_server	info = {-1, 0, 0};
 
-//	ft_printf("\nsig in : %d\n",sig);
 	(void)uap;
 	if (sig == SIGUSR1 && info.client_pid == -1)
 	{
@@ -38,13 +37,10 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 	{
 		if (info.bit_idx == 8)
 		{
-//	ft_printf("\nsig pid : %d | cli pid : %d\n",siginfo->si_pid, info.client_pid);
-//			ft_printf("%c", info.temp);
 			info.bit_idx = 0;
 			if (info.temp)
 			{
 				write(1, &info.temp, 1);
-//				ft_printf("\n1bit write\n");
 				info.temp = '\0';
 			}
 			else
@@ -58,10 +54,8 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 		if (sig == SIGUSR2)
 			info.temp |= (1 << (info.bit_idx));
 		++(info.bit_idx);
-//		ft_printf("\nres to cli\n");
 		kill(siginfo->si_pid, SIGUSR1);
 	}
-//	ft_printf("sig : %d\nsi_pid : %d\n", sig, siginfo->si_pid);
 }
 
 int	main(void)
@@ -69,7 +63,5 @@ int	main(void)
 	ft_print_start_pid(SERVER);
 	ft_set_sigaction(server_handler);
 	while (1)
-	{
 		pause();
-	}
 }

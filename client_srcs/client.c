@@ -25,12 +25,8 @@ t_client	g_info;
 void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
 	(void)uap;
-//	ft_printf("msg : %s\nnow char : %c\n",g_info.msg, *(g_info.msg + g_info.msg_idx) );
-//	ft_printf("sig : %d\nsi_pid : %d\n", sig, siginfo->si_pid);
-
 	if (sig == SIGUSR1 && siginfo->si_pid == g_info.server_pid)
 	{
-//		ft_printf("\nbit idx : %d\n", g_info.bit_idx);
 		if (g_info.bit_idx == 8)
 		{
 			if ((*(g_info.msg + g_info.msg_idx)) == 0)
@@ -50,7 +46,7 @@ void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 	else if (sig == SIGUSR2)
 		exit(2);
 	else
-		ft_printf("\nwtf?!\nsig : %d\nsipid : %d\n", sig, siginfo->si_pid);
+		ft_printf("\nerror!\nsig : %d\nsi_pid : %d\nsi_code : %d\n", sig, siginfo->si_pid, siginfo->si_code);
 }
 
 int	main(int ac, char **av)
@@ -62,8 +58,6 @@ int	main(int ac, char **av)
 	g_info = (t_client){ft_atoi((const char *)*(av + 1)), *(av + 2), 0, 0};
 	ft_print_pid_msg(g_info.server_pid, g_info.msg);
 	kill(g_info.server_pid, SIGUSR1);
-	// convert av to signal
-	// send to server
 	while (1)
 		pause();
 }
