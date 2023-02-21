@@ -14,51 +14,53 @@
 
 static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
-	static t_server	info = {-1, 0, 0};
-
 	usleep(USLEEP_SEC);
 	(void)uap;
-	if (sig == SIGUSR1 && info.client_pid == -1)
+	if (sig == SIGUSR1 && g_info.svr.client_pid == -1)
 	{
-		info.client_pid = siginfo->si_pid;
+		g_info.svr = (t_server){siginfo->si_pid, 0, 0, 0, 1};
 		ft_print_receiving(siginfo->si_pid);
-		kill(info.client_pid, SIGUSR1);
+		kill(g_info.svr.client_pid, SIGUSR1);
 	}
-	else if (siginfo->si_pid == info.client_pid)
+	else if (siginfo->si_pid == g_info.svr.client_pid)
 	{
-		if (info.bit_idx == 8)
+		g_info.svr.counter = 0;
+		if (g_info.svr.bit_idx == 8)
 		{
-			info.bit_idx = 0;
-			if (info.temp)
-				write(1, &info.temp, 1);
+			g_info.svr.bit_idx = 0;
+			if (g_info.svr.temp)
+				write(1, &g_info.svr.temp, 1);
 			else
 			{
-				info.client_pid = -1;
+				g_info.svr = (t_server){-1, 0, 0, 0, 0};
 				ft_printf("\n\n\033[36;40mReceive Success !\033[0m\n");
 				kill(siginfo->si_pid, SIGUSR1);
 				return ;
 			}
-			info.temp = '\0';
+			g_info.svr.temp = '\0';
 		}
 		if (sig == SIGUSR2)
-			info.temp |= (1 << (info.bit_idx));
-		++(info.bit_idx);
+			g_info.svr.temp |= (1 << (g_info.svr.bit_idx));
+		++(g_info.svr.bit_idx);
 		kill(siginfo->si_pid, SIGUSR1);
 	}
-	else if (siginfo->si_pid == 0)
-	{
-		ft_printf("\n\033[31;40mSignal Lost ...\033[0m\n");
-		kill(info.client_pid, SIGUSR2);
-		info = (t_server){-1, 0, 0};
-	}
-	else
-		kill(siginfo->si_pid, SIGUSR2);
 }
 
 int	main(void)
 {
 	ft_print_start_pid(SERVER);
 	ft_set_sigaction(server_handler);
+	g_info.svr = (t_server){-1, 0, 0, 0, 0};
 	while (1)
-		;
+	{
+		if (++g_info.svr.counter > TIMEOUT_CNT)
+		{
+			if (g_info.svr.connect_flag)
+			{
+				ft_printf("\n\n\033[31;40mConnection Lost . . .\033[0m\n");
+				kill(g_info.svr.client_pid, SIGUSR2);
+			}
+			g_info.svr = (t_server){-1, 0, 0, 0, 0};
+		}
+	}
 }

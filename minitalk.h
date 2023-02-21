@@ -18,13 +18,16 @@
 # include <stdlib.h>
 # include "ft_printf/ft_printf.h"
 
-# define USLEEP_SEC 40
+# define USLEEP_SEC 5
+# define TIMEOUT_CNT 100000000
 
 typedef struct s_server
 {
 	int				client_pid;
 	char			temp;
 	unsigned int	bit_idx;
+	unsigned int	counter;
+	int				connect_flag;
 }	t_server;
 
 typedef struct s_client
@@ -35,12 +38,20 @@ typedef struct s_client
 	unsigned int	bit_idx;
 }	t_client;
 
+typedef struct g_info
+{
+	t_server	svr;
+	t_client	cli;
+}	t_g_info;
+
+t_g_info	g_info;
+
 typedef enum e_program_type {
 	SERVER,
 	CLIENT
 }	t_program_type;
 
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 
 void	ft_set_sigaction(void *handler);
 void	ft_print_start_pid(t_program_type program_type);
