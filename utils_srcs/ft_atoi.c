@@ -10,7 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minitalk.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 int	ft_isspace(int c)
 {
@@ -46,7 +53,7 @@ int	ft_atoi(const char *str)
 	sign = ft_cal_sign(str, &i);
 	result = 0;
 	if (!ft_isdigit(*(str + i)))
-		exit(3);
+		ft_print_n_exit("Wrong server PID !", 2);
 	while (ft_isdigit(*(str + i)))
 	{
 		result = result * 10 + (unsigned long long)(*(str + i) - '0');

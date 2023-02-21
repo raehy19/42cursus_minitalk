@@ -34,7 +34,7 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 			else
 			{
 				info.client_pid = -1;
-				ft_printf("\n\033[36;40mReceive Success !\033[0m\n");
+				ft_printf("\n\n\033[36;40mReceive Success !\033[0m\n");
 				kill(siginfo->si_pid, SIGUSR1);
 				return ;
 			}

@@ -12,8 +12,6 @@
 
 NAME := server client
 NAME_BONUS := server_bonus client_bonus
-LIBFT := ./libft/libft.a
-LIBFT_DIR := libft
 FT_PRINTF := ./ft_printf/lib_ft_printf.a
 FT_PRINTF_DIR := ft_printf
 NAME_S := server
@@ -25,22 +23,23 @@ CFLAGS := -Wall -Wextra -Werror -MMD -MP
 RM := rm -f
 
 SERVER_SRCS := \
-	server.c
+	server.c \
 
 SERVER_SRCS_BONUS := \
-	server_bonus.c
+	server_bonus.c \
 
 CLIENT_SRCS := \
-	client.c
+	client.c \
 
 CLIENT_SRCS_BONUS := \
 	client_bonus.c
 
 UTILS_SRCS := \
-	utils.c
+	ft_atoi.c \
+	utils.c \
 
 UTILS_SRCS_BONUS := \
-	utils_bonus.c
+	utils_bonus.c \
 
 all : $(NAME)
 
@@ -76,7 +75,6 @@ UTILS_DEPS_BONUS := $(addprefix utils_srcs/, $(UTILS_SRCS_BONUS:.c=.d))
 -include $(SERVER_DEPS) $(SERVER_DEPS_BONUS) $(CLIENT_DEPS) $(CLIENT_DEPS_BONUS)
 
 clean :
-	make -C $(LIBFT_DIR) clean
 	make -C $(FT_PRINTF_DIR) clean
 	$(RM) $(SERVER_OBJS)
 	$(RM) $(SERVER_OBJS_BONUS)
@@ -92,7 +90,6 @@ clean :
 	$(RM) $(UTILS_DEPS_BONUS)
 
 fclean : clean
-	make -C $(LIBFT_DIR) fclean
 	make -C $(FT_PRINTF_DIR) fclean
 	$(RM) $(BONUS_NAME)
 	$(RM) $(NAME)
@@ -100,20 +97,17 @@ fclean : clean
 re : fclean
 	make all
 
-$(LIBFT) :
-	make -C $(LIBFT_DIR) all
-
 $(FT_PRINTF) :
 	make -C $(FT_PRINTF_DIR) all
 
-$(NAME_S) : $(LIBFT) $(UTILS_OBJS) $(FT_PRINTF) $(SERVER_OBJS)
+$(NAME_S) : $(UTILS_OBJS) $(FT_PRINTF) $(SERVER_OBJS)
 	$(CC) -L$(FT_PRINTF_DIR) $^ -o $@
 
 $(NAME_S_BONUS) : $(SERVER_OBJS_BONUS)
 	$(CC) $^ -o $@
 	cp $(NAME_S_BONUS) ./$(NAME_S)
 
-$(NAME_C) : $(LIBFT) $(UTILS_OBJS) $(FT_PRINTF) $(CLIENT_OBJS)
+$(NAME_C) : $(UTILS_OBJS) $(FT_PRINTF) $(CLIENT_OBJS)
 	$(CC) $^ -o $@
 
 $(NAME_C_BONUS) : $(CLIENT_OBJS_BONUS)

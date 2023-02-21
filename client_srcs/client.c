@@ -15,7 +15,7 @@
 
 t_client	g_info;
 
-void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
+static void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
 	usleep(USLEEP_SEC);
 	(void)uap;
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 		ft_print_n_exit("Wrong arguments !", 1);
 	ft_print_start_pid(CLIENT);
 	ft_set_sigaction(client_handler);
-	g_info = (t_client){ft_atoi((const char *)*(av + 1)), *(av + 2), 0, 0};
+	g_info = (t_client){ft_atoi(*(av + 1)), *(av + 2), 0, 0};
 	ft_print_pid_msg(g_info.server_pid, g_info.msg);
 	if (kill(g_info.server_pid, SIGUSR1) < 0)
 		ft_print_n_exit("Can't connect to server !", 3);

@@ -16,10 +16,9 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
-# include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 
-#define USLEEP_SEC 1
+# define USLEEP_SEC 40
 
 typedef struct s_server
 {
@@ -40,6 +39,8 @@ typedef enum e_program_type {
 	SERVER,
 	CLIENT
 }	t_program_type;
+
+int	ft_atoi(const char *str);
 
 void	ft_set_sigaction(void *handler);
 void	ft_print_start_pid(t_program_type program_type);
