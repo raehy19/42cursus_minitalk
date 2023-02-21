@@ -39,14 +39,16 @@ UTILS_SRCS := \
 	utils.c \
 
 UTILS_SRCS_BONUS := \
+	ft_atoi_bonus.c \
 	utils_bonus.c \
 
 all : $(NAME)
 
-#bonus : $(NAME_BONUS)
+bonus : $(NAME_BONUS)
 
 both :
-	make all
+	make $(NAME_S)
+	make $(NAME_C)
 
 SERVER_OBJS := $(addprefix server_srcs/, $(SERVER_SRCS:.c=.o))
 
@@ -103,14 +105,14 @@ $(FT_PRINTF) :
 $(NAME_S) : $(UTILS_OBJS) $(FT_PRINTF) $(SERVER_OBJS)
 	$(CC) -L$(FT_PRINTF_DIR) $^ -o $@
 
-$(NAME_S_BONUS) : $(SERVER_OBJS_BONUS)
+$(NAME_S_BONUS) : $(UTILS_OBJS_BONUS) $(FT_PRINTF) $(SERVER_OBJS_BONUS)
 	$(CC) $^ -o $@
 	cp $(NAME_S_BONUS) ./$(NAME_S)
 
 $(NAME_C) : $(UTILS_OBJS) $(FT_PRINTF) $(CLIENT_OBJS)
 	$(CC) $^ -o $@
 
-$(NAME_C_BONUS) : $(CLIENT_OBJS_BONUS)
+$(NAME_C_BONUS) : $(UTILS_OBJS_BONUS) $(FT_PRINTF) $(CLIENT_OBJS_BONUS)
 	$(CC) $^ -o $@
 	cp $(NAME_C_BONUS) ./$(NAME_C)
 
