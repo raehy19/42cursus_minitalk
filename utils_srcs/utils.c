@@ -52,3 +52,9 @@ void	ft_print_receiving(int pid)
 	ft_printf("\033[34mClient PID : \033[35m%d\033[0m\n", pid);
 	ft_printf("\033[34mMessage    : \033[35m");
 }
+
+void	ft_print_n_exit(char *str, int exit_code)
+{
+	ft_printf("\n\033[34;40m%s\033[0m\n", str);
+	exit(exit_code);
+}
