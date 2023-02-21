@@ -55,6 +55,9 @@ void	ft_print_receiving(int pid)
 
 void	ft_print_n_exit(char *str, int exit_code)
 {
-	ft_printf("\n\033[34;40m%s\033[0m\n", str);
+	if (exit_code == 0)
+		ft_printf("\n\033[36;40m%s\033[0m\n", str);
+	else
+		ft_printf("\n\033[31;40m%s\033[0m\n", str);
 	exit(exit_code);
 }

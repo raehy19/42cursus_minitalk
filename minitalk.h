@@ -19,41 +19,27 @@
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 
-#define USLEEP_SEC 500
-#define WAIT_CNT 1000
-#define TIMEOUT_CNT 10000
-
-typedef enum e_program_type {
-	SERVER,
-	CLIENT
-}	t_program_type;
+#define USLEEP_SEC 1
 
 typedef struct s_server
 {
 	int				client_pid;
 	char			temp;
-	unsigned int	bit_i;
-	unsigned int	counter;
-	int				last_sig;
-}	t_server_info;
+	unsigned int	bit_idx;
+}	t_server;
 
 typedef struct s_client
 {
 	int				server_pid;
 	char			*msg;
-	unsigned int	msg_i;
-	unsigned int	bit_i;
-	unsigned int	counter;
-	int				last_sig;
-}	t_client_info;
+	unsigned int	msg_idx;
+	unsigned int	bit_idx;
+}	t_client;
 
-typedef struct s_global
-{
-	t_server_info	ser;
-	t_client_info	cli;
-}	t_global_info;
-
-t_global_info	g_info;
+typedef enum e_program_type {
+	SERVER,
+	CLIENT
+}	t_program_type;
 
 void	ft_set_sigaction(void *handler);
 void	ft_print_start_pid(t_program_type program_type);
