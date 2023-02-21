@@ -12,6 +12,29 @@
 
 #include "../minitalk.h"
 
+static void	ft_receive(int sig)
+{
+	g_info.svr.counter = 0;
+	if (g_info.svr.bit_idx == 8)
+	{
+		g_info.svr.bit_idx = 0;
+		if (g_info.svr.temp)
+			write(1, &g_info.svr.temp, 1);
+		else
+		{
+			g_info.svr = (t_server){-1, 0, 0, 0, 0};
+			ft_printf("\n\n\033[36;40mReceive Success !\033[0m\n");
+			kill(g_info.svr.client_pid, SIGUSR1);
+			return ;
+		}
+		g_info.svr.temp = '\0';
+	}
+	if (sig == SIGUSR2)
+		g_info.svr.temp |= (1 << (g_info.svr.bit_idx));
+	++(g_info.svr.bit_idx);
+	kill(g_info.svr.client_pid, SIGUSR1);
+}
+
 static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
 	usleep(USLEEP_SEC);
@@ -23,27 +46,7 @@ static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 		kill(g_info.svr.client_pid, SIGUSR1);
 	}
 	else if (siginfo->si_pid == g_info.svr.client_pid)
-	{
-		g_info.svr.counter = 0;
-		if (g_info.svr.bit_idx == 8)
-		{
-			g_info.svr.bit_idx = 0;
-			if (g_info.svr.temp)
-				write(1, &g_info.svr.temp, 1);
-			else
-			{
-				g_info.svr = (t_server){-1, 0, 0, 0, 0};
-				ft_printf("\n\n\033[36;40mReceive Success !\033[0m\n");
-				kill(siginfo->si_pid, SIGUSR1);
-				return ;
-			}
-			g_info.svr.temp = '\0';
-		}
-		if (sig == SIGUSR2)
-			g_info.svr.temp |= (1 << (g_info.svr.bit_idx));
-		++(g_info.svr.bit_idx);
-		kill(siginfo->si_pid, SIGUSR1);
-	}
+		ft_receive(sig);
 }
 
 int	main(void)
