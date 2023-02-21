@@ -15,6 +15,7 @@
 
 static void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
+	g_info.cli.counter = 0;
 	usleep(USLEEP_SEC);
 	(void)uap;
 	if (sig == SIGUSR1 && siginfo->si_pid == g_info.cli.server_pid)
@@ -46,10 +47,11 @@ int	main(int ac, char **av)
 		ft_print_n_exit("Wrong arguments !", 1);
 	ft_print_start_pid(CLIENT);
 	ft_set_sigaction(client_handler);
-	g_info.cli = (t_client){ft_atoi(*(av + 1)), *(av + 2), 0, 0};
+	g_info.cli = (t_client){ft_atoi(*(av + 1)), *(av + 2), 0, 0, 0};
 	ft_print_pid_msg(g_info.cli.server_pid, g_info.cli.msg);
 	if (kill(g_info.cli.server_pid, SIGUSR1) < 0)
 		ft_print_n_exit("Can't connect to server !", 3);
-	while (1)
+	while (++g_info.cli.counter < TIMEOUT_CNT)
 		;
+	ft_print_n_exit("Server Timeout !", 4);
 }

@@ -18,24 +18,25 @@
 # include <stdlib.h>
 # include "ft_printf/ft_printf.h"
 
-# define USLEEP_SEC 5
+# define USLEEP_SEC 30
 # define TIMEOUT_CNT 100000000
 
 typedef struct s_server
 {
-	int				client_pid;
-	char			temp;
-	unsigned int	bit_idx;
-	unsigned int	counter;
-	int				connect_flag;
+	int						client_pid;
+	char					temp;
+	unsigned int			bit_idx;
+	volatile sig_atomic_t	counter;
+	volatile sig_atomic_t	connect_flag;
 }	t_server;
 
 typedef struct s_client
 {
-	int				server_pid;
-	char			*msg;
-	unsigned int	msg_idx;
-	unsigned int	bit_idx;
+	int						server_pid;
+	char					*msg;
+	unsigned int			msg_idx;
+	unsigned int			bit_idx;
+	volatile sig_atomic_t	counter;
 }	t_client;
 
 typedef struct g_info

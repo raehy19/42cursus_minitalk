@@ -14,7 +14,6 @@
 
 static void	ft_receive(int sig)
 {
-	g_info.svr.counter = 0;
 	if (g_info.svr.bit_idx == 8)
 	{
 		g_info.svr.bit_idx = 0;
@@ -37,6 +36,7 @@ static void	ft_receive(int sig)
 
 static void	server_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {
+	g_info.svr.counter = 0;
 	usleep(USLEEP_SEC);
 	(void)uap;
 	if (sig == SIGUSR1 && g_info.svr.client_pid == -1)
