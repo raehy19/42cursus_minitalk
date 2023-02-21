@@ -22,9 +22,9 @@ static void	ft_receive(int sig)
 			write(1, &g_info.svr.temp, 1);
 		else
 		{
-			g_info.svr = (t_server){-1, 0, 0, 0, 0};
 			ft_printf("\n\n\033[36;40mReceive Success !\033[0m\n");
 			kill(g_info.svr.client_pid, SIGUSR1);
+			g_info.svr = (t_server){-1, 0, 0, 0, 0};
 			return ;
 		}
 		g_info.svr.temp = '\0';
