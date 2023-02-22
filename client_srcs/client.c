@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-#include "signal.h"
+
+extern t_g_info	g_info;
 
 static void	client_handler(int sig, siginfo_t *siginfo, ucontext_t *uap)
 {

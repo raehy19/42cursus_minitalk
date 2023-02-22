@@ -45,8 +45,6 @@ typedef struct g_info
 	t_client	cli;
 }	t_g_info;
 
-t_g_info	g_info;
-
 typedef enum e_program_type {
 	SERVER,
 	CLIENT

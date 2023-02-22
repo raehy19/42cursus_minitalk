@@ -12,6 +12,8 @@
 
 #include "../minitalk.h"
 
+t_g_info	g_info;
+
 void	ft_set_sigaction(void *handler)
 {
 	struct sigaction	act;
